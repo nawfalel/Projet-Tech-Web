@@ -8,12 +8,15 @@ import UserProfile from '../pages/UserProfile/UserProfile';
 import AdminProfile from '../pages/AdminProfile/AdminProfile';
 import { Box } from '@mui/system';
 import { useEffect } from 'react';
-import RecipeAdminArea from '../pages/AdminProfile/childComponent/RecipeAdminArea';
+import RecipeAdminArea from '../pages/AdminProfile/childComponent/RecipeAdminArea/RecipeAdminAreaContainer';
 import IngredientAreaAdmin from '../pages/AdminProfile/childComponent/IngredientAreaAdmin/IngredientAreaAdminContainer';
 import UpdateIngredientAdmin from '../pages/AdminProfile/childComponent/UpdateIngredientAdmin.js/UpdateIngredientAdminContainer';
 import AddRecipe from '../pages/UserProfile/AddRecipe/AddRecipeContainer';
 import ViewRecipeUser from '../pages/UserProfile/ViewRecipeUser/ViewRecipeUserContainer';
 import RecipeUserDetails from '../pages/UserProfile/RecipeUserDetails/RecipeUserDetailsContainer';
+import ViewAllRecipes from '../pages/UserProfile/ViewAllRecipes/ViewAllRecipesContainer';
+import ViewFavoriteRecipes from '../pages/UserProfile/ViewFavoriteRecipes/ViewFavoriteRecipesContainer';
+import RecipeAdminDetails from '../pages/AdminProfile/childComponent/RecipeAdminDetails/RecipeAdminDetailsContainer';
 
 
 
@@ -65,7 +68,8 @@ function App(props) {
           <Route path="addrecipe" element={<AddRecipe />}/>
           <Route path="viewrecipe" element={<ViewRecipeUser />}/>
           <Route path="seerecipedetails/:recipeid" element={<RecipeUserDetails />}/>
-          
+          <Route path="allrecipes" element={<ViewAllRecipes />}/>
+          <Route path="favoriterecipes" element={<ViewFavoriteRecipes />}/>
         </Route>
 
         <Route path="/adminProfile" element={
@@ -77,6 +81,7 @@ function App(props) {
            <Route path="ingredient" element={<IngredientAreaAdmin/>} />
            <Route path="recipe" element={<RecipeAdminArea/>} />
            <Route path="updateIngredient/:id" element={<UpdateIngredientAdmin />} />
+           <Route path="viewrecipe/:recipeid" element={<RecipeAdminDetails />}/>
         </Route>
 
       </Routes>

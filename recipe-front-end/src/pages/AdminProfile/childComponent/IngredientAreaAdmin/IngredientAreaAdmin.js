@@ -3,7 +3,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Pagination, Stack } from '@mui/material';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -54,6 +54,18 @@ export default function IngredientAreaAdmin(props) {
     const [valueTabListOfIngredient, setValueTabListOfIngredient] = useState(0);
 
     const [listOfIngredientPage, setListOfIngredientPage] = useState(1);
+
+    const [currentPage, setCurrentPage] = useState(1);
+
+    const pageSize = 3;
+
+    //Will recompute only if dependency changes
+    const currentTableData = useMemo(() => {
+        const firstPageIndex = (currentPage - 1) * pageSize;
+        const lastPageIndex = firstPageIndex + pageSize;
+
+        return props.ingredientListAdmin.slice(firstPageIndex, lastPageIndex);
+    }, [props.ingredientListAdmin, currentPage]);
 
     const formikAddIngredient = useFormik({
         initialValues: {
@@ -133,7 +145,7 @@ export default function IngredientAreaAdmin(props) {
                     alignItems="center"
                     rowSpacing={2}
                     spacing={0}>
-                    {props.ingredientListAdmin.map(ingredient =>
+                    {currentTableData.map(ingredient =>
                         <Grid item xs={12} mb={4}>
                             <Card>
                                 <Grid container direction="row" justifyContent="center" alignItems='center'>
@@ -179,7 +191,7 @@ export default function IngredientAreaAdmin(props) {
                 </Grid>
 
 
-                <Pagination count={10} page={listOfIngredientPage} onChange={handleListOfIngredientPageChange} />
+                <Pagination count={Math.ceil(props.ingredientListAdmin.length / pageSize)} page={currentPage} onChange={(e, value) => { setCurrentPage(value) }} />
 
             </TabPanel>
 

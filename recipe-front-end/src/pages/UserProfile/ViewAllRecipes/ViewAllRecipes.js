@@ -7,16 +7,17 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { useEffect } from 'react';
-import userService from '../../../services/user.service';
-import { initialize_list_of_ingredients_user } from '../../../redux/action-creators/user_operation';
 import { useNavigate } from 'react-router-dom';
+import userService from '../../../services/user.service';
 
-const ViewRecipeUser = (props) => {
+const ViewAllRecipes = (props) => {
 
     const navigate = useNavigate();
 
     const [currentPage, setCurrentPage] = useState(1);
-    
+
+    const [allRecipes, setAllRecipes] = useState([]);
+
     const pageSize = 3;
 
     //Will recompute only if dependency changes
@@ -24,23 +25,32 @@ const ViewRecipeUser = (props) => {
         const firstPageIndex = (currentPage - 1) * pageSize;
         const lastPageIndex = firstPageIndex + pageSize;
 
-        return props.recipesListUserReducer.slice(firstPageIndex, lastPageIndex);
-      }, [props.recipesListUserReducer, currentPage]);
+        return allRecipes.slice(firstPageIndex, lastPageIndex);
+    }, [allRecipes, currentPage]);
 
     useEffect(() => {
-        userService.getRecipesUser()
+        userService.getFavoriteRecipes()
+            .then(response => {
+                props.initialize_list_of_favorite_recipes(response.data);
+
+                userService.getAllRecipes()
                     .then(response => {
-                        console.log(`resp: ${JSON.stringify(response.data)}`)
-                        props.initialize_list_of_recipes_user(response.data);
+                        setAllRecipes(response.data);
                     })
                     .catch(error => console.log(`error: ${error}`));
+            })
+            .catch(error => console.log(`error: ${error}`));
+
     }, []);
 
-    const deleteRecipeFromList = (recipeId) => {
-        userService.deleteRecipesUser(recipeId)
-                    .then(response => {
-                        props.delete_recipe_from_list_of_recipes(recipeId);
-                    })
+    const addRecipeToFavorite = (recipeId) => {
+        userService.addRecipeToFavorite(recipeId)
+            .then(response => {
+                console.log(`successfully added to favorite`)
+                props.add_recipe_to_favorite(recipeId);
+                navigate("/userProfile/favoriterecipes")
+            })
+            .catch(err => console.log(`can't added recipe to favorite`));
     }
 
     return (
@@ -66,10 +76,14 @@ const ViewRecipeUser = (props) => {
                                                 onClick={() => navigate(`/userProfile/seerecipedetails/${recipe.id}`)}>
                                                 Voir détail
                                             </Button>
-                                            <Button color="secondary" variant="contained"
-                                                onClick={() => deleteRecipeFromList(recipe.id)}>
-                                                Supprimer
-                                            </Button>
+                                            {(!props.recipesUserFavoriteReducer.map(re => re.id).includes(recipe.id))
+                                                ? <Button color="secondary" variant="contained"
+                                                    onClick={() => addRecipeToFavorite(recipe.id)}>
+                                                    Ajouter au favoris
+                                                </Button>
+                                                : ""
+                                            }
+
                                         </Stack>
 
                                     </Stack>
@@ -95,10 +109,10 @@ const ViewRecipeUser = (props) => {
 
             </Grid>
 
-            <Pagination count={props.recipesListUserReducer.length} page={currentPage} onChange={(e, value) => {console.log(value); setCurrentPage(value)}} />
-            
+            <Pagination count={Math.ceil(allRecipes.length / pageSize)} page={currentPage} onChange={(e, value) => { setCurrentPage(value) }} />
+
         </Stack>
     );
 }
 
-export default ViewRecipeUser;
+export default ViewAllRecipes;

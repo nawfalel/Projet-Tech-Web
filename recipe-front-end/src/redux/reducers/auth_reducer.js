@@ -49,12 +49,36 @@ const recipesListUserReducer = (state = [], action) => {
     }
 }
 
+const recipesUserFavoriteReducer = (state = [], action) => {
+    switch(action.type) {
+        case "ADD_RECIPE_TO_FAVORITE":
+            return [...state, {... action.payload}];
+        case "GET_FAVORITE_RECIPE_USER":
+            return [...action.payload]; 
+        case "REPLACE_RECIPE_FAVORITE_USER":
+            return [...action.payload];
+        default:
+            return state;
+    }
+}
+
+const recipesAllAdminReducer = (state = [], action) => {
+    switch(action.type) {
+        case "INIT_ALL_RECIPES":
+            return [...action.payload];
+        default:
+            return state;
+    }
+}
+
 
 const rootReducer = combineReducers({
     isUserConnectedReducer: isUserConnectedReducer,
     isUserAdminReducer: isUserAdminReducer,
     ingredientListAdmin: ingredientListAdmin,
-    recipesListUserReducer: recipesListUserReducer
+    recipesListUserReducer: recipesListUserReducer,
+    recipesUserFavoriteReducer: recipesUserFavoriteReducer,
+    recipesAllAdminReducer: recipesAllAdminReducer
 });
 
 export default rootReducer;

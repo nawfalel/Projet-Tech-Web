@@ -111,7 +111,9 @@ const UserProfile = () => {
                         <ListItemText
                             disableTypography
                             inset
-                            primary={<Typography component="h6">Découvrir recette</Typography>}
+                            primary={<Link to="/userProfile/allrecipes" style={{ textDecoration: 'none' }}>
+                                <Typography component="h6">Découvrir recette</Typography>
+                            </Link>}
                         />
                     </MenuItem>
 
@@ -119,18 +121,11 @@ const UserProfile = () => {
                         <ListItemText
                             disableTypography
                             inset
-                            primary={<Typography component="h6">Voir ma liste de favoris</Typography>}
+                            primary={<Link to="/userProfile/favoriterecipes" style={{ textDecoration: 'none' }}>
+                                <Typography component="h6">Voir ma liste de favoris</Typography>
+                            </Link>}
                         />
                     </MenuItem>
-
-                    <MenuItem>
-                        <ListItemText
-                            disableTypography
-                            inset
-                            primary={<Typography component="h6">Supprimer de ma liste</Typography>}
-                        />
-                    </MenuItem>
-
                 </MenuList>
             </Drawer>
             <Box
