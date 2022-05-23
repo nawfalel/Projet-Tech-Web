@@ -32,11 +32,13 @@ const SignInPage = (props) => {
 
                       if (response.data.authenticationToken) {
                         authService.saveUserDataInLocalStorage(response.data);
-
-                      if(response.data.roles.includes("ROLE_ADMIN"))
-                        navigate("/adminProfile");
-                      else
-                        navigate("/userProfile")
+                      setTimeout(() => {
+                        if(response.data.roles.includes("ROLE_ADMIN"))
+                        navigate("/adminProfile/ingredient");
+                        else
+                          navigate("/userProfile/viewrecipe")
+                      },50);
+                      
                      }
                      
                    })

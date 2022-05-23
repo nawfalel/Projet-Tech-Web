@@ -1,23 +1,33 @@
-import { useSelector } from "react-redux";
-import { Navigate, Outlet, Route, useNavigate } from "react-router-dom";
-import SignInPage from "../pages/signin/SignInPage";
+import React from 'react'
+import {Navigate, Outlet} from 'react-router-dom'
+import { store } from './global-constants';
 
 
+const useAuth=(typeOfVerification)=>{
+	const user = JSON.parse(localStorage.getItem("user"));
+	const roles = user?.roles;
 
-export const ProtectedRoute = ({ path,
-                                 exact,
-                                 children,
-                              }) => {
+	if(typeOfVerification == "IS_USER_NOT_CONNECTED")
+		if(!roles)
+			return true;
 
-    const isUserConnected = useSelector((store) => store.isUserConnectedReducer);
-    
-    return isUserConnected ? (
-      <Route path={path} exact={exact}>
-        {children}
-      </Route>
-    ) : (
-      <Route path={path} exact={exact}>
-        {children}
-      </Route>
-    );
-  };
+
+	if(typeOfVerification == "IS_USER_CONNECTED")
+		return roles.includes("ROLE_USER");
+	else if(typeOfVerification == "IS_ADMIN_CONNECTED")
+		return roles.includes("ROLE_ADMIN");
+	else
+		return false;
+
+}
+	
+
+export const ProtectedRoute = (props) =>{
+
+	let { typeOfVerification } = props;
+
+	const auth = useAuth(typeOfVerification)
+
+  	return auth ? <Outlet/> : <Navigate to="/"/>
+}
+	

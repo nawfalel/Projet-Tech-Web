@@ -26,7 +26,7 @@ import RecipeAdminDetails from '../pages/AdminProfile/childComponent/RecipeAdmin
 
 function App(props) {
 
-  
+
   useEffect(() => {
 
     props.is_user_connected();
@@ -34,7 +34,7 @@ function App(props) {
     props.is_user_admin();
 
   }, []);
-  
+
 
   const is_user_connected = props.isUserConnectedReducer;
 
@@ -47,41 +47,37 @@ function App(props) {
     <Box>
       <CustomNavbar />
       <Routes>
-        <Route path="/signin" element={
 
-          <ProtectedRoute redirectPath="/"
-            isAllowed={!is_user_connected}>
-            <SignInPage />
-          </ProtectedRoute>
-        } />
-
-        <Route path="/signup" element={
-          <ProtectedRoute redirectPath="/"
-            isAllowed={!is_user_connected}>
-            <SignUpPage />
-          </ProtectedRoute>
-        } />
+        <Route element={<ProtectedRoute typeOfVerification="IS_USER_NOT_CONNECTED" />}>
+          <Route path="/signin" element={<SignInPage />} />
+          <Route path="/signup" element={<SignUpPage />} />
+        </Route>
 
         <Route path="/" element={<HomePage />} />
 
-        <Route path="/userProfile" element={<UserProfile />}>
-          <Route path="addrecipe" element={<AddRecipe />}/>
-          <Route path="viewrecipe" element={<ViewRecipeUser />}/>
-          <Route path="seerecipedetails/:recipeid" element={<RecipeUserDetails />}/>
-          <Route path="allrecipes" element={<ViewAllRecipes />}/>
-          <Route path="favoriterecipes" element={<ViewFavoriteRecipes />}/>
+        <Route element={<ProtectedRoute typeOfVerification="IS_USER_CONNECTED" />}>
+          <Route path="/userProfile" element={<UserProfile />}>
+            <Route path="addrecipe" element={<AddRecipe />} />
+            <Route path="viewrecipe" element={<ViewRecipeUser />} />
+            <Route path="seerecipedetails/:recipeid" element={<RecipeUserDetails />} />
+            <Route path="allrecipes" element={<ViewAllRecipes />} />
+            <Route path="favoriterecipes" element={<ViewFavoriteRecipes />} />
+          </Route>
         </Route>
 
-        <Route path="/adminProfile" element={
-          <ProtectedRoute redirectPath="/"
-            isAllowed={true}>
-            <AdminProfile />
-          </ProtectedRoute>
-        }>
-           <Route path="ingredient" element={<IngredientAreaAdmin/>} />
-           <Route path="recipe" element={<RecipeAdminArea/>} />
-           <Route path="updateIngredient/:id" element={<UpdateIngredientAdmin />} />
-           <Route path="viewrecipe/:recipeid" element={<RecipeAdminDetails />}/>
+        <Route element={<ProtectedRoute typeOfVerification="IS_ADMIN_CONNECTED" />}>
+          <Route path="/adminProfile" element={<AdminProfile />}>
+            <Route path="recipe" element={<RecipeAdminArea />} />
+            <Route path="ingredient" element={<IngredientAreaAdmin />}>
+              <Route path="updateIngredient/:id" element={<UpdateIngredientAdmin />} />
+              <Route path="viewrecipe/:recipeid" element={<RecipeAdminDetails />} />
+            </Route>
+
+
+          </Route>
+
+          <Route path="ingredient" element={<IngredientAreaAdmin />} />
+
         </Route>
 
       </Routes>
