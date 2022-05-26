@@ -97,12 +97,12 @@ const CustomNavbar = (props) => {
                         (!props.isUserConnectedReducer) ?
                             <Stack direction="row" spacing={2}>
 
-                                <Link to="signin" style={{ textDecoration: 'none' }}>
-                                    <Button variant="contained" color="success">
+                                <Link to="signin" style={{ color: 'inherit', textDecoration: 'inherit'}}>
+                                    <Button variant="contained" color="third">
                                         Se connecter
                                     </Button>
                                 </Link>
-                                <Link to="signup" style={{ textDecoration: 'none' }}>
+                                <Link to="signup" style={{ color: 'inherit', textDecoration: 'inherit'}}>
                                     <Button variant="contained" color="secondary">
                                         Créer un compte
                                     </Button>
@@ -111,7 +111,7 @@ const CustomNavbar = (props) => {
                             :
                             <Stack direction="row" spacing={2}>
 
-                                <Button onClick={() => logout()} variant="contained" color="success">
+                                <Button onClick={() => logout()} variant="contained" color="secondary">
                                     Logout
                                 </Button>
 

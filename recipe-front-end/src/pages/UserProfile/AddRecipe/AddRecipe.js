@@ -109,6 +109,7 @@ const AddRecipe = (props) => {
                         />
                         <Box>
                             <Button
+                                color="third"
                                 variant="contained"
                                 sx={{ mt: 3, mb: 2, width: 300 }}
                                 onClick={(e) => addIngredientFormik(e, values, setValues)}
@@ -190,6 +191,7 @@ const AddRecipe = (props) => {
                         </FieldArray>
 
                         <Button
+                            color="secondary"
                             type="submit"
                             fullWidth
                             variant="contained"

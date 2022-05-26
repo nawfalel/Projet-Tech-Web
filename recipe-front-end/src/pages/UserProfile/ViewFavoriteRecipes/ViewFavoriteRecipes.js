@@ -63,7 +63,7 @@ const ViewFavoriteRecipes = (props) => {
                                             {recipe.label}
                                         </Typography>
                                         <Stack direction="row" spacing={2} alignItems='center' xs={12} md={6}>
-                                            <Button color="primary" variant="contained"
+                                            <Button color="third" variant="contained"
                                                 onClick={() => navigate(`/userprofile/seerecipedetails/${recipe.id}`)}>
                                                 Voir détail
                                             </Button>

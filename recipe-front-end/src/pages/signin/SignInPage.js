@@ -14,7 +14,6 @@ import { useFormik } from 'formik';
 import { Link, useNavigate } from 'react-router-dom';
 import authService from '../../services/auth.service';
 
-const theme = createTheme();
 
 const SignInPage = (props) => {
 
@@ -49,7 +48,6 @@ const SignInPage = (props) => {
 
 
   return (
-    <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -60,7 +58,7 @@ const SignInPage = (props) => {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ m: 1, bgcolor: 'third.main' }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
@@ -93,6 +91,7 @@ const SignInPage = (props) => {
             <Button
               type="submit"
               fullWidth
+              color="secondary"
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
@@ -108,7 +107,6 @@ const SignInPage = (props) => {
           </Box>
         </Box>
       </Container>
-    </ThemeProvider>
   );
 }
 

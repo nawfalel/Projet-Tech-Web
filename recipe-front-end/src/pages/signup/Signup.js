@@ -36,7 +36,6 @@ const SignUpPage = () => {
   });
 
   return (
-    <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -47,7 +46,7 @@ const SignUpPage = () => {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ m: 1, bgcolor: 'third.main' }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
@@ -79,6 +78,7 @@ const SignUpPage = () => {
             />
             <Button
               type="submit"
+              color="secondary"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
@@ -96,7 +96,6 @@ const SignUpPage = () => {
           </Box>
         </Box>
       </Container>
-    </ThemeProvider>
   );
 }
 

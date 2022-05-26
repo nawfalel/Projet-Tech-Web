@@ -15,8 +15,8 @@ const AdminProfile = () => {
     const goToIngredientMenu = () => navigate("/adminprofile/ingredient");
 
     const buttons = [
-        <Button key="one" variant="contained" color="primary" onClick={goToIngredientMenu}>Ingredients</Button>,
-        <Button key="two" variant="contained" color="secondary" onClick={goToRecipeMenu}>List of recipes</Button>
+        <Button key="one" variant="contained" color="third" onClick={goToIngredientMenu}>Ingrédients</Button>,
+        <Button key="two" variant="contained" color="secondary" onClick={goToRecipeMenu}>Liste des recettes</Button>
     ];
     return (
         <Container component="main" maxWidth="lg">

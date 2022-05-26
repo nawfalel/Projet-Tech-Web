@@ -134,7 +134,7 @@ export default function IngredientAreaAdmin(props) {
                 aria-label="Vertical tabs example"
                 sx={{ borderRight: 1, borderColor: 'divider' }}
             >
-                <Tab label="List of ingredients" {...a11yProps(0)} />
+                <Tab label="List of ingredients" {...a11yProps(0)}/>
                 <Tab label="Add Ingredient" {...a11yProps(1)} />
             </Tabs>
 
@@ -157,7 +157,7 @@ export default function IngredientAreaAdmin(props) {
                                                 {ingredient.label}
                                             </Typography>
                                             <Stack direction="row" spacing={2} alignItems='center' xs={12} md={6}>
-                                                <Button color="success"
+                                                <Button color="third"
                                                         variant="contained"
                                                         onClick={() => switchToUpdateIngredientPage(ingredient.id)}>
                                                     Mettre à jour
@@ -234,6 +234,7 @@ export default function IngredientAreaAdmin(props) {
                                 type="submit"
                                 fullWidth
                                 variant="contained"
+                                color="secondary"
                                 sx={{ mt: 3, mb: 2 }}
                             >
                                 Ajouter ingrédient

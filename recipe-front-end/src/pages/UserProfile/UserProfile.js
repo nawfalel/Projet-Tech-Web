@@ -46,7 +46,7 @@ const UserProfile = () => {
                     <Box sx={{ flexGrow: 1 }}>
                         <Stack direction="row" spacing={2} justifyContent="flex-end" alignItems="center">
 
-                            <Button onClick={() => logout()} variant="contained" color="success">
+                            <Button onClick={() => logout()} variant="contained" color="secondary">
                                 Logout
                             </Button>
 

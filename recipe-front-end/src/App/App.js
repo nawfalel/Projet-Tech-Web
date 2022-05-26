@@ -17,6 +17,7 @@ import RecipeUserDetails from '../pages/UserProfile/RecipeUserDetails/RecipeUser
 import ViewAllRecipes from '../pages/UserProfile/ViewAllRecipes/ViewAllRecipesContainer';
 import ViewFavoriteRecipes from '../pages/UserProfile/ViewFavoriteRecipes/ViewFavoriteRecipesContainer';
 import RecipeAdminDetails from '../pages/AdminProfile/childComponent/RecipeAdminDetails/RecipeAdminDetailsContainer';
+import { createTheme, ThemeProvider } from '@mui/material';
 
 
 
@@ -40,46 +41,68 @@ function App(props) {
 
   const is_user_admin = props.isUserAdminReducer;
 
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: "#ECA502",
+      },
+      secondary: {
+        main: "#49EC02",
+      },
+      third: {
+        main: "#17C6F1"
+      }
+    },
+    typography: {
+      third: {
+        color: 'white',
+      },
+      // Disable h3 variant
+      h3: undefined,
+    },
+  });
 
   return (
 
+    <ThemeProvider theme={theme}>
+      <Box>
+        <CustomNavbar />
+        <Routes>
 
-    <Box>
-      <CustomNavbar />
-      <Routes>
-
-        <Route element={<ProtectedRoute typeOfVerification="IS_USER_NOT_CONNECTED" />}>
-          <Route path="/signin" element={<SignInPage />} />
-          <Route path="/signup" element={<SignUpPage />} />
-        </Route>
-
-        <Route path="/" element={<HomePage />} />
-
-        <Route element={<ProtectedRoute typeOfVerification="IS_USER_CONNECTED" />}>
-          <Route path="/userprofile" element={<UserProfile />}>
-            <Route path="addrecipe" element={<AddRecipe />} />
-            <Route path="viewrecipe" element={<ViewRecipeUser />} />
-            <Route path="seerecipedetails/:recipeid" element={<RecipeUserDetails />} />
-            <Route path="allrecipes" element={<ViewAllRecipes />} />
-            <Route path="favoriterecipes" element={<ViewFavoriteRecipes />} />
+          <Route element={<ProtectedRoute typeOfVerification="IS_USER_NOT_CONNECTED" />}>
+            <Route path="/signin" element={<SignInPage />} />
+            <Route path="/signup" element={<SignUpPage />} />
           </Route>
-        </Route>
 
-        <Route element={<ProtectedRoute typeOfVerification="IS_ADMIN_CONNECTED" />}>
-          <Route path="/adminprofile" element={<AdminProfile />}>
-            <Route path="recipe" element={<RecipeAdminArea />} />
-            <Route path="viewrecipe/:recipeid" element={<RecipeAdminDetails />} />
+          <Route path="/" element={<HomePage />} />
+
+          <Route element={<ProtectedRoute typeOfVerification="IS_USER_CONNECTED" />}>
+            <Route path="/userprofile" element={<UserProfile />}>
+              <Route path="addrecipe" element={<AddRecipe />} />
+              <Route path="viewrecipe" element={<ViewRecipeUser />} />
+              <Route path="seerecipedetails/:recipeid" element={<RecipeUserDetails />} />
+              <Route path="allrecipes" element={<ViewAllRecipes />} />
+              <Route path="favoriterecipes" element={<ViewFavoriteRecipes />} />
+            </Route>
+          </Route>
+
+          <Route element={<ProtectedRoute typeOfVerification="IS_ADMIN_CONNECTED" />}>
+            <Route path="/adminprofile" element={<AdminProfile />}>
+              <Route path="recipe" element={<RecipeAdminArea />} />
+              <Route path="viewrecipe/:recipeid" element={<RecipeAdminDetails />} />
+              <Route path="ingredient" element={<IngredientAreaAdmin />} />
+              <Route path="updateIngredient/:id" element={<UpdateIngredientAdmin />} />
+            </Route>
+
             <Route path="ingredient" element={<IngredientAreaAdmin />} />
-            <Route path="updateIngredient/:id" element={<UpdateIngredientAdmin />} />
+
           </Route>
 
-          <Route path="ingredient" element={<IngredientAreaAdmin />} />
+        </Routes>
 
-        </Route>
+      </Box>
 
-      </Routes>
-
-    </Box>
+    </ThemeProvider>
   );
 }
 
