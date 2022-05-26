@@ -48,11 +48,11 @@ class AuthService {
   }
 
   isUserConnected() {
-      return axios.get(API_URL + "api/recipe/auth/isUserConnected");
+      return axios.get(API_URL + "api/recipe/auth/isuserconnected");
   }
 
   isUserAdmin() {
-    return axios.get(API_URL + "api/recipe/admin/isUserAdmin");
+    return axios.get(API_URL + "api/recipe/admin/isuseradmin");
   }
 
 }

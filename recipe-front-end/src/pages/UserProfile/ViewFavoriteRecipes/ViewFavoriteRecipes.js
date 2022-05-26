@@ -31,9 +31,10 @@ const ViewFavoriteRecipes = (props) => {
     useEffect(() => {
         userService.getFavoriteRecipes()
             .then(response => {
+                console.log(`favorite recipes: ${JSON.stringify(response.data)}`)
                 props.initialize_list_of_favorite_recipes(response.data);
             })
-            .catch(error => console.log(`error: ${error}`));
+            .catch(error => console.log(`cannot load favorite recipes / error: ${error}`));
     }, []);
 
     const deleteRecipeFromFavorite = (recipeId) => {
@@ -71,7 +72,7 @@ const ViewFavoriteRecipes = (props) => {
                                         </Typography>
                                         <Stack direction="row" spacing={2} alignItems='center' xs={12} md={6}>
                                             <Button color="primary" variant="contained"
-                                                onClick={() => navigate(`/userProfile/seerecipedetails/${recipe.id}`)}>
+                                                onClick={() => navigate(`/userprofile/seerecipedetails/${recipe.id}`)}>
                                                 Voir détail
                                             </Button>
                                             <Button color="secondary" variant="contained"

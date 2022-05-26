@@ -14,6 +14,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import Container from '@mui/material/Container';
 import { useNavigate } from 'react-router-dom';
+import { create_alert_message } from '../../../../utilities/alerts';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -76,9 +77,10 @@ export default function IngredientAreaAdmin(props) {
 
             adminService.addIngredient(values)
                 .then(response => {
+                    create_alert_message("SUCCESS_ALERT", "L'ingrédient a été ajouté avec succès");
                     props.add_ingredient_to_state_action_creator({...values, id: response.data.id});
                 })
-                .catch(error => console.log(`error while adding ingredient`))
+                .catch(error => create_alert_message("WARNING_ALERT", "L'ingrédient n'a pas pu être ajouté"));
 
         },
     });
@@ -95,27 +97,26 @@ export default function IngredientAreaAdmin(props) {
     };
 
     const deleteIngredient = (id) => {
-        console.log(`the id is: ${id}`)
+
         adminService.deleteIngredient(id)
                     .then(response => {
                         const newIngredientList = 
                                 props.ingredientListAdmin
                                      .filter(ingredient => ingredient.id !== id);
-                        
                         props.initialize_list_of_ingredient_admin(newIngredientList);
         })
-        .catch(error => console.log(`can't delete the ingredient`))
+        .catch(error => create_alert_message("WARNING_ALERT", "L'ingrédient n'a pas pu être supprimé (peut être qu'il est utilisé dans certaines recettes créés)"))
         
     }
 
     const switchToUpdateIngredientPage = (id) => {
-        navigate(`/adminProfile/updateIngredient/${id}`);
+        navigate(`/adminprofile/updateingredient/${id}`);
     }
 
     useEffect(() => {
         adminService.getListOfIngredient()
             .then(response => {
-                props.initialize_list_of_ingredient_admin(response.data);
+                props.initialize_list_of_ingredient_admin(response.data.reverse());
             })
             .catch(err => console.log("can't retrieve list of ingredients"));
     }, []);

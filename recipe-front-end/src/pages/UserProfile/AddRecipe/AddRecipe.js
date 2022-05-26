@@ -6,6 +6,7 @@ import { useFormik, FieldArray, Field, Form, Formik } from 'formik';
 import { useEffect, useState } from 'react';
 import adminService from '../../../services/admin.service';
 import userService from '../../../services/user.service';
+import { create_alert_message } from '../../../utilities/alerts';
 
 
 const AddRecipe = (props) => {
@@ -41,9 +42,9 @@ const AddRecipe = (props) => {
         console.log('SUCCESS!! :-)\n\n' + JSON.stringify(values, null, 4));
         userService.addRecipe(values)
                     .then(response => {
-                        console.log(`recipe added`)
+                        create_alert_message("SUCCESS_ALERT", "Recette ajoutée avec succès");
                     })
-                    .catch(err => console.log(`error : ${err}`))
+                    .catch(err => create_alert_message("WARNING_ALERT", "La recette n'a pas pu être créée"));
     }
 
 
@@ -108,7 +109,6 @@ const AddRecipe = (props) => {
                         />
                         <Box>
                             <Button
-                                type="submit"
                                 variant="contained"
                                 sx={{ mt: 3, mb: 2, width: 300 }}
                                 onClick={(e) => addIngredientFormik(e, values, setValues)}

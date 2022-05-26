@@ -9,6 +9,7 @@ import Button from '@mui/material/Button';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import userService from '../../../services/user.service';
+import { create_alert_message } from '../../../utilities/alerts';
 
 const ViewAllRecipes = (props) => {
 
@@ -31,11 +32,12 @@ const ViewAllRecipes = (props) => {
     useEffect(() => {
         userService.getFavoriteRecipes()
             .then(response => {
-                props.initialize_list_of_favorite_recipes(response.data);
+                props.initialize_list_of_favorite_recipes(response.data.reverse());
 
                 userService.getAllRecipes()
                     .then(response => {
-                        setAllRecipes(response.data);
+                        props.initialize_all_recipes_admin(response.data.reverse());
+                        setAllRecipes(response.data.reverse());
                     })
                     .catch(error => console.log(`error: ${error}`));
             })
@@ -46,11 +48,11 @@ const ViewAllRecipes = (props) => {
     const addRecipeToFavorite = (recipeId) => {
         userService.addRecipeToFavorite(recipeId)
             .then(response => {
-                console.log(`successfully added to favorite`)
+                console.log(`recipes added to favorite`)
                 props.add_recipe_to_favorite(recipeId);
-                navigate("/userProfile/favoriterecipes")
+                navigate("/userprofile/favoriterecipes");
             })
-            .catch(err => console.log(`can't added recipe to favorite`));
+            .catch(err => create_alert_message("WARNING_ALERT", "La recette n'a pas pu être ajoutée aux favoris"));
     }
 
     return (
@@ -61,8 +63,8 @@ const ViewAllRecipes = (props) => {
                 alignItems="center"
                 rowSpacing={2}
                 spacing={0}>
-                {currentTableData.map(recipe =>
-                    <Grid item xs={12} mb={4}>
+                {currentTableData.map((recipe, index) =>
+                    <Grid key={index} item xs={12} mb={4}>
                         <Card>
                             <Grid container direction="row" justifyContent="center" alignItems='center'>
                                 <Grid item xs={6}>
@@ -73,7 +75,7 @@ const ViewAllRecipes = (props) => {
                                         </Typography>
                                         <Stack direction="row" spacing={2} alignItems='center' xs={12} md={6}>
                                             <Button color="primary" variant="contained"
-                                                onClick={() => navigate(`/userProfile/seerecipedetails/${recipe.id}`)}>
+                                                onClick={() => navigate(`/userprofile/seerecipedetails/${recipe.id}`)}>
                                                 Voir détail
                                             </Button>
                                             {(!props.recipesUserFavoriteReducer.map(re => re.id).includes(recipe.id))

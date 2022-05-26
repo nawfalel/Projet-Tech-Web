@@ -16,9 +16,9 @@ const RecipeUserDetails = (props) => {
 
     useEffect(() => {
         console.log("useEffect")
-        const listOfRecipes = props.recipesListUserReducer;
+        const listOfRecipes = props.recipesAllAdminReducer;
         if (listOfRecipes.length == 0) {
-            navigate("/userProfile/viewrecipe");
+            navigate("/userprofile/viewrecipe");
         }
 
         else {

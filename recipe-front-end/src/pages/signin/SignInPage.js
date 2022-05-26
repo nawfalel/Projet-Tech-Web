@@ -34,9 +34,9 @@ const SignInPage = (props) => {
                         authService.saveUserDataInLocalStorage(response.data);
                       setTimeout(() => {
                         if(response.data.roles.includes("ROLE_ADMIN"))
-                        navigate("/adminProfile/ingredient");
+                        navigate("/adminprofile/ingredient");
                         else
-                          navigate("/userProfile/viewrecipe")
+                          navigate("/userprofile/viewrecipe")
                       },50);
                       
                      }

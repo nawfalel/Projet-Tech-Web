@@ -10,6 +10,7 @@ import { useEffect } from 'react';
 import userService from '../../../services/user.service';
 import { initialize_list_of_ingredients_user } from '../../../redux/action-creators/user_operation';
 import { useNavigate } from 'react-router-dom';
+import { create_alert_message } from '../../../utilities/alerts';
 
 const ViewRecipeUser = (props) => {
 
@@ -31,7 +32,7 @@ const ViewRecipeUser = (props) => {
         userService.getRecipesUser()
                     .then(response => {
                         console.log(`resp: ${JSON.stringify(response.data)}`)
-                        props.initialize_list_of_recipes_user(response.data);
+                        props.initialize_list_of_recipes_user(response.data.reverse());
                     })
                     .catch(error => console.log(`error: ${error}`));
     }, []);
@@ -40,7 +41,9 @@ const ViewRecipeUser = (props) => {
         userService.deleteRecipesUser(recipeId)
                     .then(response => {
                         props.delete_recipe_from_list_of_recipes(recipeId);
+                        create_alert_message("SUCCESS_ALERT", "Recette supprimée avec succès");
                     })
+                    .catch(err => create_alert_message("WARNING_ALERT", "Recette non supprimée"))
     }
 
     return (
@@ -63,7 +66,7 @@ const ViewRecipeUser = (props) => {
                                         </Typography>
                                         <Stack direction="row" spacing={2} alignItems='center' xs={12} md={6}>
                                             <Button color="primary" variant="contained"
-                                                onClick={() => navigate(`/userProfile/seerecipedetails/${recipe.id}`)}>
+                                                onClick={() => navigate(`/userprofile/seerecipedetails/${recipe.id}`)}>
                                                 Voir détail
                                             </Button>
                                             <Button color="secondary" variant="contained"

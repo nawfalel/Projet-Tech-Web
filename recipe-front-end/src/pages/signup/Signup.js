@@ -12,6 +12,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useFormik } from 'formik';
 import authService from '../../services/auth.service';
 import { Link } from 'react-router-dom';
+import { create_alert_message } from '../../utilities/alerts';
 
 
 const theme = createTheme();
@@ -27,11 +28,9 @@ const SignUpPage = () => {
 
         authService.register(values)
                    .then(response => {
-
-                     console.log(`You've been registered sucessfully`)
-                     
+                      create_alert_message("SUCCESS_ALERT", "Votre compte a été créé avec succès");
                    })
-                   .catch(err => console.log(`the registration has failed`));
+                   .catch(err => create_alert_message("WARNING_ALERT", "Votre compte n'a pas pu être créé"));
 
     },
   });

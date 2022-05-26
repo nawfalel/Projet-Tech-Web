@@ -12,9 +12,10 @@ const useAuth=(typeOfVerification)=>{
 			return true;
 
 
-	if(typeOfVerification == "IS_USER_CONNECTED")
+	if(typeOfVerification == "IS_USER_CONNECTED" && roles)
 		return roles.includes("ROLE_USER");
-	else if(typeOfVerification == "IS_ADMIN_CONNECTED")
+
+	else if(typeOfVerification == "IS_ADMIN_CONNECTED" && roles)
 		return roles.includes("ROLE_ADMIN");
 	else
 		return false;

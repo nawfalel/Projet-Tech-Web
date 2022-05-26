@@ -9,6 +9,7 @@ import TextField from '@mui/material/TextField';
 import Container from '@mui/material/Container';
 import { useParams } from 'react-router-dom';
 import adminService from '../../../../services/admin.service';
+import { create_alert_message } from '../../../../utilities/alerts';
 
 const UpdateIngredientAdmin = (props) => {
 
@@ -31,9 +32,10 @@ const UpdateIngredientAdmin = (props) => {
                     const newIngredientList = 
                                 props.ingredientListAdmin
                                      .filter(ingredient => ingredient.id !== values.id);
+                    create_alert_message("SUCCESS_ALERT", "L'ingrédient a été mis à jour");
                     props.initialize_list_of_ingredient_admin([...newIngredientList, {...values}]);
                 })
-                .catch(error => console.log(`error while adding ingredient`))
+                .catch(error => create_alert_message("WARNING_ALERT", "L'ingrédient n'a pas pu être mis à jour"));
 
         },
     });

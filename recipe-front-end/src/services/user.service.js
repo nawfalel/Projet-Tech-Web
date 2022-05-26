@@ -23,11 +23,11 @@ class UserService {
   }
 
   getAllRecipes() {
-    return axios.get(API_URL + `api/recipe/user/recipe/getallRecipes`);
+    return axios.get(API_URL + `api/recipe/user/recipe/getallrecipes`);
   }
 
   getFavoriteRecipes() {
-    return axios.get(API_URL + `api/recipe/admin/recipe/favorite/getallfavorite`);
+    return axios.get(API_URL + `api/recipe/user/favorite/getallfavorite`);
   }
 
   deleteRecipesUser(recipeId) {
@@ -36,7 +36,7 @@ class UserService {
 
   deleteRecipeFromFavorite(recipeId) {
     const username = authService.getCurrentUser();
-    return axios.delete(API_URL + `api/recipe/admin/recipe/favorite/deletefavorite/${username}/${recipeId}`);
+    return axios.delete(API_URL + `api/recipe/user/favorite/deletefavorite/${username}/${recipeId}`);
   }
 
   addRecipe(recipe) {
@@ -51,7 +51,7 @@ class UserService {
 
   addRecipeToFavorite(recipeId) {
     const username = authService.getCurrentUser();
-    return axios.post(API_URL + `api/recipe/admin/recipe/favorite/addfavorite`, {
+    return axios.post(API_URL + `api/recipe/user/favorite/addfavorite`, {
       username,
       recipeId
     });

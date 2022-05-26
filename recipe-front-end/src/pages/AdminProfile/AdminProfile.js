@@ -11,8 +11,8 @@ const AdminProfile = () => {
 
     const navigate = useNavigate();
 
-    const goToRecipeMenu = () => navigate("/adminProfile/recipe");
-    const goToIngredientMenu = () => navigate("/adminProfile/ingredient");
+    const goToRecipeMenu = () => navigate("/adminprofile/recipe");
+    const goToIngredientMenu = () => navigate("/adminprofile/ingredient");
 
     const buttons = [
         <Button key="one" variant="contained" color="primary" onClick={goToIngredientMenu}>Ingredients</Button>,

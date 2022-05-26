@@ -31,22 +31,12 @@ const RecipeAdminArea = (props) => {
     useEffect(() => {
         userService.getAllRecipes()
                     .then(response => {
-                        props.initialize_all_recipes_admin(response.data);
-                        setAllRecipes(response.data);
+                        props.initialize_all_recipes_admin(response.data.reverse());
+                        setAllRecipes(response.data.reverse());
                     })
                     .catch(error => console.log(`error: ${error}`));
 
     }, []);
-
-    const addRecipeToFavorite = (recipeId) => {
-        userService.addRecipeToFavorite(recipeId)
-            .then(response => {
-                console.log(`successfully added to favorite`)
-                props.add_recipe_to_favorite(recipeId);
-                navigate("/userProfile/favoriterecipes")
-            })
-            .catch(err => console.log(`can't added recipe to favorite`));
-    }
 
     return (
         <Stack direction="column" spacing={2} justifyContent="center" alignItems="center">
@@ -68,7 +58,7 @@ const RecipeAdminArea = (props) => {
                                         </Typography>
                                         <Stack direction="row" spacing={2} alignItems='center' xs={12} md={6}>
                                             <Button color="secondary" variant="contained"
-                                                onClick={() => navigate(`/adminProfile/viewrecipe/${recipe.id}`)}>
+                                                onClick={() => navigate(`/adminprofile/viewrecipe/${recipe.id}`)}>
                                                 Voir détail
                                             </Button>
                                         </Stack>

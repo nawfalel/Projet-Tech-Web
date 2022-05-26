@@ -56,7 +56,7 @@ function App(props) {
         <Route path="/" element={<HomePage />} />
 
         <Route element={<ProtectedRoute typeOfVerification="IS_USER_CONNECTED" />}>
-          <Route path="/userProfile" element={<UserProfile />}>
+          <Route path="/userprofile" element={<UserProfile />}>
             <Route path="addrecipe" element={<AddRecipe />} />
             <Route path="viewrecipe" element={<ViewRecipeUser />} />
             <Route path="seerecipedetails/:recipeid" element={<RecipeUserDetails />} />
@@ -66,14 +66,11 @@ function App(props) {
         </Route>
 
         <Route element={<ProtectedRoute typeOfVerification="IS_ADMIN_CONNECTED" />}>
-          <Route path="/adminProfile" element={<AdminProfile />}>
+          <Route path="/adminprofile" element={<AdminProfile />}>
             <Route path="recipe" element={<RecipeAdminArea />} />
-            <Route path="ingredient" element={<IngredientAreaAdmin />}>
-              <Route path="updateIngredient/:id" element={<UpdateIngredientAdmin />} />
-              <Route path="viewrecipe/:recipeid" element={<RecipeAdminDetails />} />
-            </Route>
-
-
+            <Route path="viewrecipe/:recipeid" element={<RecipeAdminDetails />} />
+            <Route path="ingredient" element={<IngredientAreaAdmin />} />
+            <Route path="updateIngredient/:id" element={<UpdateIngredientAdmin />} />
           </Route>
 
           <Route path="ingredient" element={<IngredientAreaAdmin />} />

@@ -18,7 +18,7 @@ const RecipeAdminDetails = (props) => {
  
         const listOfRecipes = props.recipesAllAdminReducer;
         if (listOfRecipes.length == 0) {
-            navigate("/adminProfile/recipe");
+            navigate("/adminprofile/recipe");
         }
 
         else {
