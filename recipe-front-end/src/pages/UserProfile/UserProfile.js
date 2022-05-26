@@ -81,7 +81,7 @@ const UserProfile = () => {
                         <ListItemText
                             disableTypography
                             inset
-                            primary={<Link to="/userprofile/viewrecipe" style={{ textDecoration: 'none' }}>
+                            primary={<Link to="/userprofile/viewrecipe" style={{ color: 'inherit', textDecoration: 'inherit'}}>
                                 <Typography component="h6">Voir mes recettes</Typography>
                             </Link>}
                         />
@@ -91,7 +91,7 @@ const UserProfile = () => {
                         <ListItemText
                             disableTypography
                             inset
-                            primary={<Link to="/userprofile/addrecipe" style={{ textDecoration: 'none' }}>
+                            primary={<Link to="/userprofile/addrecipe" style={{ color: 'inherit', textDecoration: 'inherit'}}>
                                 <Typography component="h6">Ajouter une recette</Typography>
                             </Link>}
                         />
@@ -111,7 +111,7 @@ const UserProfile = () => {
                         <ListItemText
                             disableTypography
                             inset
-                            primary={<Link to="/userprofile/allrecipes" style={{ textDecoration: 'none' }}>
+                            primary={<Link to="/userprofile/allrecipes" style={{ color: 'inherit', textDecoration: 'inherit'}}>
                                 <Typography component="h6">Découvrir recette</Typography>
                             </Link>}
                         />
@@ -121,7 +121,7 @@ const UserProfile = () => {
                         <ListItemText
                             disableTypography
                             inset
-                            primary={<Link to="/userprofile/favoriterecipes" style={{ textDecoration: 'none' }}>
+                            primary={<Link to="/userprofile/favoriterecipes" style={{ color: 'inherit', textDecoration: 'inherit'}}>
                                 <Typography component="h6">Voir ma liste de favoris</Typography>
                             </Link>}
                         />

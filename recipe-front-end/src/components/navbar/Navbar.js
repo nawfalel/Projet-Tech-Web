@@ -80,44 +80,47 @@ const CustomNavbar = (props) => {
                         <Menu />
                     </IconButton>
                     <LocalDining sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-                    <Typography
-                        variant="h6"
-                        noWrap
-                        component="div"
-                        sx={{ display: { xs: 'none', sm: 'block' } }} 
-                    >
-                        Recipe
-                    </Typography>
+                    <Link to="/" style={{ color: 'inherit', textDecoration: 'inherit'}}>
+                        <Typography
+                            variant="h6"
+                            noWrap
+                            component="div"
+                            sx={{ display: { xs: 'none', sm: 'block' } }}
+                        >
+                            Recipe
+                        </Typography>
+                    </Link>
+
                     <Box sx={{ flexGrow: 1 }} />
 
                     {
-                        (!props.isUserConnectedReducer) ? 
-                        <Stack direction="row" spacing={2}>
-                        
-                            <Link to="signin" style={{ textDecoration: 'none' }}>
-                                <Button variant="contained" color="success">
-                                    Se connecter
+                        (!props.isUserConnectedReducer) ?
+                            <Stack direction="row" spacing={2}>
+
+                                <Link to="signin" style={{ textDecoration: 'none' }}>
+                                    <Button variant="contained" color="success">
+                                        Se connecter
+                                    </Button>
+                                </Link>
+                                <Link to="signup" style={{ textDecoration: 'none' }}>
+                                    <Button variant="contained" color="secondary">
+                                        Créer un compte
+                                    </Button>
+                                </Link>
+                            </Stack>
+                            :
+                            <Stack direction="row" spacing={2}>
+
+                                <Button onClick={() => logout()} variant="contained" color="success">
+                                    Logout
                                 </Button>
-                            </Link>
-                            <Link to="signup" style={{ textDecoration: 'none' }}>
-                                <Button variant="contained" color="secondary">
-                                    Créer un compte
-                                </Button>
-                            </Link>
-                        </Stack>
-                        :
-                        <Stack direction="row" spacing={2}>
-                        
-                            <Button onClick={() => logout()} variant="contained" color="success">
-                                Logout
-                            </Button>
-                           
-                        </Stack>
+
+                            </Stack>
                     }
-                    
+
                 </Toolbar>
             </AppBar>
-            
+
         </Box>
     );
 }

@@ -48,7 +48,7 @@ const ViewAllRecipes = (props) => {
     const addRecipeToFavorite = (recipeId) => {
         userService.addRecipeToFavorite(recipeId)
             .then(response => {
-                console.log(`recipes added to favorite`)
+
                 props.add_recipe_to_favorite(recipeId);
                 navigate("/userprofile/favoriterecipes");
             })

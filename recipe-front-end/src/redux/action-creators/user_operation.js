@@ -27,14 +27,14 @@ export const is_user_admin = () => {
 
         authService.isUserAdmin()
                    .then(({data}) => {
-                    //    console.log("api: the user is admin")
+
                         dispatch({
                             type: "IS_USER_ADMIN",
                             payload: true 
                         });
                    })
                    .catch(err => {
-                    // console.log("api: the user isn't admin")
+
                         dispatch({
                             type: "IS_USER_ADMIN",
                             payload: false 

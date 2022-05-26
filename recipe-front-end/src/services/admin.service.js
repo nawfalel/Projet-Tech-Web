@@ -9,7 +9,6 @@ class AdminService {
     }
 
     addIngredient({label, imageUrl}) {
-        console.log(`label: ${label} / imageUrl: ${imageUrl}`)
         return axios.post(`${API_URL}api/recipe/admin/ingredient/addingredient`,{
             label,
             imageUrl

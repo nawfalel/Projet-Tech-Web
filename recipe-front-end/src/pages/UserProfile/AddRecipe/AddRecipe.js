@@ -39,7 +39,7 @@ const AddRecipe = (props) => {
     }, []);
 
     const addRecipe = (values) => {
-        console.log('SUCCESS!! :-)\n\n' + JSON.stringify(values, null, 4));
+
         userService.addRecipe(values)
                     .then(response => {
                         create_alert_message("SUCCESS_ALERT", "Recette ajoutée avec succès");

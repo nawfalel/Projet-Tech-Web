@@ -17,16 +17,14 @@ class AuthService {
   saveUserDataInLocalStorage(data) {
     localStorage.setItem("user", JSON.stringify(data));
     store.dispatch({  type: "LOGIN_USER" });
-    console.log(`data: ${JSON.stringify(data.roles)}`)
+
     if(data.roles.includes("ROLE_ADMIN")) {
-      console.log("dispatch admin set")
       store.dispatch({  type: "IS_USER_ADMIN", payload: true });
     }
   }
 
   logout() {
     localStorage.removeItem("user");
-    console.log("logout calling")
     store.dispatch({  type: "LOGOUT_USER" });
   }
 

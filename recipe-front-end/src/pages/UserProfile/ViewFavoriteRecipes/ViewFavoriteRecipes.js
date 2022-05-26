@@ -31,7 +31,6 @@ const ViewFavoriteRecipes = (props) => {
     useEffect(() => {
         userService.getFavoriteRecipes()
             .then(response => {
-                console.log(`favorite recipes: ${JSON.stringify(response.data)}`)
                 props.initialize_list_of_favorite_recipes(response.data);
             })
             .catch(error => console.log(`cannot load favorite recipes / error: ${error}`));
@@ -42,14 +41,7 @@ const ViewFavoriteRecipes = (props) => {
                    .then(response => {
                         props.delete_recipe_from_list_of_favorite_recipes(recipeId);
                    })
-                   .catch(err => console.log(`can't delete the recipe from favorite`))
-        
-        // userService.addRecipeToFavorite(recipeId)
-        //     .then(response => {
-        //         console.log(`successfully added to favorite`)
-        //         props.add_recipe_to_favorite(recipeId);
-        //     })
-        //     .catch(err => console.log(`can't added recipe to favorite`));
+                   .catch(err => console.log(`can't delete the recipe from favorite`));
     }
 
     return (

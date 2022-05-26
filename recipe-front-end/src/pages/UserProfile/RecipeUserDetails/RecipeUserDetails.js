@@ -12,10 +12,10 @@ const RecipeUserDetails = (props) => {
     const [recipeData, setRecipeData] = useState({ imageUrl: "", description: "", label: "", recipeIngredientsDto: [] });
     const navigate = useNavigate();
     const { recipeid: recipeId } = useParams();
-    console.log(recipeId)
+
 
     useEffect(() => {
-        console.log("useEffect")
+
         const listOfRecipes = props.recipesAllAdminReducer;
         if (listOfRecipes.length == 0) {
             navigate("/userprofile/viewrecipe");

@@ -12,7 +12,7 @@ const RecipeAdminDetails = (props) => {
     const [recipeData, setRecipeData] = useState({ imageUrl: "", description: "", label: "", recipeIngredientsDto: [] });
     const navigate = useNavigate();
     const { recipeid: recipeId } = useParams();
-    console.log(recipeId)
+
 
     useEffect(() => {
  

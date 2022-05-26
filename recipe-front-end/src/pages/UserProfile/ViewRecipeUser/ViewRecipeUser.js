@@ -31,7 +31,6 @@ const ViewRecipeUser = (props) => {
     useEffect(() => {
         userService.getRecipesUser()
                     .then(response => {
-                        console.log(`resp: ${JSON.stringify(response.data)}`)
                         props.initialize_list_of_recipes_user(response.data.reverse());
                     })
                     .catch(error => console.log(`error: ${error}`));
