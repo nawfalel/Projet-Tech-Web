@@ -15,6 +15,7 @@ import TextField from '@mui/material/TextField';
 import Container from '@mui/material/Container';
 import { useNavigate } from 'react-router-dom';
 import { create_alert_message } from '../../../../utilities/alerts';
+import NoDataAvailable from '../../../../components/NoDataAvailable';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -146,6 +147,7 @@ export default function IngredientAreaAdmin(props) {
                     alignItems="center"
                     rowSpacing={2}
                     spacing={0}>
+                    {(props.ingredientListAdmin.length == 0 ? <NoDataAvailable message="Aucun ingrédient n'a été ajouté"/> : "")}
                     {currentTableData.map(ingredient =>
                         <Grid item xs={12} mb={4}>
                             <Card>

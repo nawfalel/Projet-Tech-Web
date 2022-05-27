@@ -11,6 +11,7 @@ import userService from '../../../services/user.service';
 import { initialize_list_of_ingredients_user } from '../../../redux/action-creators/user_operation';
 import { useNavigate } from 'react-router-dom';
 import { create_alert_message } from '../../../utilities/alerts';
+import NoDataAvailable from '../../../components/NoDataAvailable';
 
 const ViewRecipeUser = (props) => {
 
@@ -32,6 +33,7 @@ const ViewRecipeUser = (props) => {
         userService.getRecipesUser()
                     .then(response => {
                         props.initialize_list_of_recipes_user(response.data.reverse());
+                        props.initialize_all_recipes_admin(response.data.reverse());
                     })
                     .catch(error => console.log(`error: ${error}`));
     }, []);
@@ -53,6 +55,7 @@ const ViewRecipeUser = (props) => {
                 alignItems="center"
                 rowSpacing={2}
                 spacing={0}>
+                {(props.recipesListUserReducer.length == 0 ? <NoDataAvailable message="Aucune recette n'a été ajoutée"/> : "")}
                 {currentTableData.map(recipe =>
                     <Grid item xs={12} mb={4}>
                         <Card>

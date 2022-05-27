@@ -13,6 +13,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useFormik } from 'formik';
 import { Link, useNavigate } from 'react-router-dom';
 import authService from '../../services/auth.service';
+import { create_alert_message } from '../../utilities/alerts';
 
 
 const SignInPage = (props) => {
@@ -41,7 +42,7 @@ const SignInPage = (props) => {
                      }
                      
                    })
-                   .catch(err => console.log(`The credentials aren't correct`));
+                   .catch(err => create_alert_message("WARNING_ALERT", "Connexion échouée, veuillez rééssayer"));
 
     },
   });

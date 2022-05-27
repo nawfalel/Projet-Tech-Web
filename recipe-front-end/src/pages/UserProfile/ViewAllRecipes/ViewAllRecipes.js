@@ -10,6 +10,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import userService from '../../../services/user.service';
 import { create_alert_message } from '../../../utilities/alerts';
+import NoDataAvailable from '../../../components/NoDataAvailable';
 
 const ViewAllRecipes = (props) => {
 
@@ -63,6 +64,7 @@ const ViewAllRecipes = (props) => {
                 alignItems="center"
                 rowSpacing={2}
                 spacing={0}>
+                {(allRecipes.length == 0 ? <NoDataAvailable message="Aucune recette n'a été ajoutée"/> : "")}    
                 {currentTableData.map((recipe, index) =>
                     <Grid key={index} item xs={12} mb={4}>
                         <Card>

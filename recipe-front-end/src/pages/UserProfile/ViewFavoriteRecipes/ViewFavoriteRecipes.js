@@ -9,6 +9,7 @@ import Button from '@mui/material/Button';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import userService from '../../../services/user.service';
+import NoDataAvailable from '../../../components/NoDataAvailable';
 
 const ViewFavoriteRecipes = (props) => {
 
@@ -52,6 +53,7 @@ const ViewFavoriteRecipes = (props) => {
                 alignItems="center"
                 rowSpacing={2}
                 spacing={0}>
+                {(props.recipesUserFavoriteReducer.length == 0 ? <NoDataAvailable message="Vous n'avez aucune recette favoris"/> : "")} 
                 {currentTableData.map(recipe =>
                     <Grid item xs={12} mb={4}>
                         <Card>

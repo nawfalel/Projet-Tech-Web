@@ -8,6 +8,7 @@ import Button from '@mui/material/Button';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import userService from '../../../../services/user.service';
+import NoDataAvailable from '../../../../components/NoDataAvailable';
 
 
 const RecipeAdminArea = (props) => {
@@ -46,6 +47,7 @@ const RecipeAdminArea = (props) => {
                 alignItems="center"
                 rowSpacing={2}
                 spacing={0}>
+                {(allRecipes.length == 0 ? <NoDataAvailable message="Aucune recette n'a été ajoutée"/> : "")}
                 {currentTableData.map(recipe =>
                     <Grid item xs={12} mb={4}>
                         <Card>

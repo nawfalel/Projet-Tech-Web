@@ -47,10 +47,11 @@ function App(props) {
         main: "#ECA502",
       },
       secondary: {
-        main: "#49EC02",
+        main: "#2F992A",
       },
       third: {
-        main: "#17C6F1"
+        main: "#2A6799",
+        contrastText: "#fff"
       }
     },
     typography: {
