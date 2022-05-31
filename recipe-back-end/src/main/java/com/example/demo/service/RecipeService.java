@@ -3,6 +3,7 @@ package com.example.demo.service;
 import com.example.demo.dto.CustomMessage;
 import com.example.demo.dto.IngredientDto;
 import com.example.demo.dto.RecipeDto;
+import com.example.demo.dto.RecipeFavoriteDto;
 import com.example.demo.exception.AppException;
 import com.example.demo.mapperDto.IngredientMapper;
 import com.example.demo.mapperDto.RecipeMapper;
@@ -24,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -118,6 +120,61 @@ public class RecipeService {
             return recipeDtos;
         }
         catch(Exception exc) {
+            return null;
+        }
+    }
+
+    public CustomMessage addARecipeAsFavorite(RecipeFavoriteDto recipeFavoriteDto) {
+        try {
+            System.out.println("recipeFav begin: " );
+            System.out.println("recipeFav: " + recipeFavoriteDto);
+            AppUser user = userRepository.findByUsername(recipeFavoriteDto.getUsername()).orElseThrow(() -> new AppException("User not found") );
+            Recipe recipe = recipeRepository.findById(recipeFavoriteDto.getRecipeId()).orElseThrow(() -> new AppException("Recipe not found") );
+            recipe.getAppUsersFavorite().add(user);
+
+            recipeRepository.save(recipe);
+            return new CustomMessage("recipe added to the favorite list");
+        }
+        catch (Exception e) {
+            System.out.println("exception: " + e.getMessage());
+            return null;
+        }
+    }
+
+    public List<RecipeDto> getAllFavoriteRecipes() {
+        try {
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            String username = auth.getName();
+
+            List<Recipe> recipes = recipeRepository.findAllByAppUsersFavorite_UsernameIn(Arrays.asList(username));
+
+            List<RecipeDto> recipeDtos = recipes.stream()
+                    .map(recipe -> RecipeMapper.INSTANCE.mapToRecipeDto(recipe))
+                    .collect(Collectors.toList());
+
+            return recipeDtos;
+        }
+        catch(Exception exc) {
+            return null;
+        }
+    }
+
+    @Transactional
+    public CustomMessage deleteFavoriteRecipe(String username, Long recipeId) {
+        try {
+            AppUser user = userRepository.findByUsername(username).orElseThrow(() -> new AppException("User not found") );
+            Recipe recipe = recipeRepository.findById(recipeId).orElseThrow(() -> new AppException("Recipe not found") );
+            boolean isRemoved = user.getFavoriteRecipes().remove(recipe);
+            if(isRemoved) {
+                userRepository.save(user);
+                return new CustomMessage("Recipe has been removed from favorite");
+            }
+
+            else
+                throw new AppException("Couldn't remove the recipe from favorite list");
+        }
+        catch(Exception e) {
+            System.out.println("Exception: " + e.getMessage());
             return null;
         }
     }

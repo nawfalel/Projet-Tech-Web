@@ -25,6 +25,7 @@ public class Recipe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique=true)
     private String label;
 
     private String description;
@@ -40,4 +41,15 @@ public class Recipe {
     @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "recipe")
     private List<RecipeIngredient> recipeIngredients;
 
+    @ManyToMany
+    @JoinTable(
+            name = "favorite_recipe",
+            joinColumns = @JoinColumn(name = "recipe_id"),
+            inverseJoinColumns = @JoinColumn(name = "app_user_id")
+    )
+    List<AppUser> appUsersFavorite;
+
+    public boolean equals(Recipe recipe) {
+        return this.id == recipe.getId() || this.label == recipe.getLabel();
+    }
 }

@@ -27,13 +27,16 @@ public class AppUser {
     @ManyToOne(fetch = FetchType.EAGER)
     private Role role;
 
-    @ManyToMany
-    @JoinTable(
-            name = "AppUserFavoriteRecipe",
-            joinColumns = @JoinColumn(name = "appuser_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "recipe_id", referencedColumnName = "id")
-    )
-    private List<Recipe> recipes;
+//    @ManyToMany
+//    @JoinTable(
+//            name = "user_created_recipes",
+//            joinColumns = @JoinColumn(name = "appuser_id", referencedColumnName = "id"),
+//            inverseJoinColumns = @JoinColumn(name = "recipe_id", referencedColumnName = "id")
+//    )
+//    private List<Recipe> recipes;
+
+    @ManyToMany(mappedBy = "appUsersFavorite")
+    private List<Recipe> favoriteRecipes;
 
     public boolean equals(AppUser user) {
         return this.id == user.getId() || this.username == user.getUsername();

@@ -19,7 +19,7 @@ public class IngredientController {
     private final IngredientService ingredientService;
 
 
-    @PostMapping("addIngredient")
+    @PostMapping("addingredient")
     public ResponseEntity<String> addIngredient(@RequestBody IngredientDto ingredientDto) {
 
         IngredientDto ingredientDtoResponse = ingredientService.addIngredient(ingredientDto);
@@ -27,7 +27,7 @@ public class IngredientController {
         return new ResponseEntity(ingredientDtoResponse, HttpStatus.OK);
     }
 
-    @DeleteMapping("deleteIngredient/{labelId}")
+    @DeleteMapping("deleteingredient/{labelId}")
     public ResponseEntity<String> deleteIngredient(@PathVariable Long labelId) {
 
 
@@ -39,7 +39,7 @@ public class IngredientController {
             return new ResponseEntity(new CustomMessage("Deletion succeeded"), HttpStatus.OK);
     }
 
-    @GetMapping("getAllIngredients")
+    @GetMapping("getallingredients")
     public ResponseEntity<List<IngredientDto>> getAllIngredients() {
 
         List<IngredientDto> ingredientsDto = ingredientService.getAllIngredients();
@@ -50,7 +50,7 @@ public class IngredientController {
             return new ResponseEntity(new CustomMessage("There were an error"), HttpStatus.CONFLICT);
     }
 
-    @PutMapping("updateIngredient")
+    @PutMapping("updateingredient")
     public ResponseEntity<List<IngredientDto>> updateIngredient(@RequestBody IngredientDto ingredientDto) {
         System.out.println("name: " + ingredientDto.getLabel());
         IngredientDto ingredientDtoResponse = ingredientService.updateIngredient(ingredientDto);

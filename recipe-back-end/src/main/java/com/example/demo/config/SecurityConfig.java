@@ -69,7 +69,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
-                .antMatchers("/api/recipe/admin/ingredient/getAllIngredients").hasAnyRole("ADMIN", "USER")
+                .antMatchers("/api/recipe/admin/ingredient/getallingredients").hasAnyRole("ADMIN", "USER")
+                .antMatchers("/api/recipe/admin/recipe/favorite/**").hasAnyRole("ADMIN", "USER")
                 .antMatchers("/api/recipe/admin/**").hasRole("ADMIN")
                 .antMatchers("/api/recipe/auth/**")
                 .authenticated();

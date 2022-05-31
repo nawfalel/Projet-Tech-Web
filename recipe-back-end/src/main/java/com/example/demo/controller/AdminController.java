@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api/recipe/admin")
 public class AdminController {
 
-    @GetMapping("isUserAdmin")
+    @GetMapping("isuseradmin")
     public CustomMessage isUserAdmin(){
         return new CustomMessage("The user is admin");
     }

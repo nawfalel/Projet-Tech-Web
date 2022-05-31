@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController
 {
 
-    @GetMapping("isUserConnected")
+    @GetMapping("isuserconnected")
     public CustomMessage isUserConnected(){
 
         return new CustomMessage("The user is connected");

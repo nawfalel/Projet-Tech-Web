@@ -4,6 +4,7 @@ import com.example.demo.model.Recipe;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,4 +19,6 @@ public interface RecipeRepository extends JpaRepository<Recipe, Long> {
     Long deleteByLabel(String label);
 
     Long deleteByIdAndAppUser_Username(Long id, String username);
+
+    List<Recipe> findAllByAppUsersFavorite_UsernameIn(List<String> usernames);
 }

@@ -18,7 +18,7 @@ public class RecipeController {
 
     private final RecipeService recipeService;
 
-    @PostMapping("addRecipe")
+    @PostMapping("addrecipe")
     public ResponseEntity<String> addRecipe(@RequestBody RecipeDto recipeDto) {
 
         RecipeDto recipeDtoResponse = recipeService.addRecipe(recipeDto);
@@ -42,7 +42,7 @@ public class RecipeController {
             return new ResponseEntity(new CustomMessage("Deletion succeeded of recipe"), HttpStatus.OK);
     }
 
-    @GetMapping("getAllRecipes")
+    @GetMapping("getallrecipes")
     public ResponseEntity<List<IngredientDto>> getAllRecipes() {
 
         List<RecipeDto> recipesDtos = recipeService.getAllRecipes();
