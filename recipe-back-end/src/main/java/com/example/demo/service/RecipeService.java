@@ -164,9 +164,9 @@ public class RecipeService {
         try {
             AppUser user = userRepository.findByUsername(username).orElseThrow(() -> new AppException("User not found") );
             Recipe recipe = recipeRepository.findById(recipeId).orElseThrow(() -> new AppException("Recipe not found") );
-            boolean isRemoved = user.getFavoriteRecipes().remove(recipe);
+            boolean isRemoved = recipe.getAppUsersFavorite().remove(user);
             if(isRemoved) {
-                userRepository.save(user);
+                recipeRepository.save(recipe);
                 return new CustomMessage("Recipe has been removed from favorite");
             }
 

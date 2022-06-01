@@ -52,4 +52,8 @@ public class Recipe {
     public boolean equals(Recipe recipe) {
         return this.id == recipe.getId() || this.label == recipe.getLabel();
     }
+
+    public String toString() {
+        return "Recipe name: " + this.getLabel();
+    }
 }

@@ -23,6 +23,7 @@ public interface RecipeMapper {
     @Mapping(target="description", expression = "java(recipeDto.getDescription())")
     @Mapping(target="imageUrl", expression = "java(recipeDto.getImageUrl())")
     @Mapping(target = "recipeIngredients", ignore = true)
+    @Mapping(target = "appUsersFavorite", ignore = true)
     @Mapping(target="appUser", expression = "java(appUser)")
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     Recipe mapToRecipe(RecipeDto recipeDto, AppUser appUser);
