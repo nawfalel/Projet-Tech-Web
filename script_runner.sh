@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#Installing npm dependencies
+npm install --prefix ./recipe-front-end
+
 if ! java -version  &> /dev/null
 then
     echo "Java est nécessaire pour lancer cette application"
